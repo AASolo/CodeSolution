@@ -1,0 +1,1155 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+  <title>Code & Solution — IT-решения</title>
+  <!-- Font Awesome 6 (бесплатная) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <!-- Google Fonts (Inter) -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,900&display=swap" rel="stylesheet" />
+  <style>
+    /* ===== СБРОС И БАЗА ===== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #0b0e14;
+      color: #e8edf5;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ===== ХЕДЕР (тёмный) ===== */
+    header {
+      background: #0b0e14;
+      border-bottom: 1px solid #1e293b;
+      padding: 16px 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      backdrop-filter: blur(6px);
+      background: rgba(11, 14, 20, 0.85);
+    }
+    .header-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 1.9rem;
+      font-weight: 900;
+      letter-spacing: -0.5px;
+    }
+    .logo-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #00b4d8;
+      color: #0b0e14;
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      font-size: 1.8rem;
+      transition: 0.3s;
+      box-shadow: 0 0 20px rgba(0, 180, 216, 0.3);
+      flex-shrink: 0;
+    }
+    .logo-icon:hover {
+      transform: rotate(-8deg) scale(1.05);
+      box-shadow: 0 0 35px #00b4d8;
+    }
+    .logo span {
+      color: #00b4d8;
+    }
+    .nav-menu {
+      display: flex;
+      gap: 32px;
+      font-weight: 500;
+      font-size: 0.95rem;
+    }
+    .nav-menu a {
+      transition: 0.3s;
+      position: relative;
+      padding: 6px 0;
+    }
+    .nav-menu a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: #00b4d8;
+      transition: 0.3s;
+    }
+    .nav-menu a:hover {
+      color: #00b4d8;
+    }
+    .nav-menu a:hover::after {
+      width: 100%;
+    }
+    .hamburger {
+      display: none;
+      font-size: 1.8rem;
+      cursor: pointer;
+      color: #e8edf5;
+      padding: 4px 8px;
+      border-radius: 8px;
+      transition: background 0.2s;
+    }
+    .hamburger:hover {
+      background: rgba(255,255,255,0.05);
+    }
+
+    /* ===== ГЕРОЙ ===== */
+    .hero {
+      padding: 90px 0 100px;
+      background: radial-gradient(circle at 20% 30%, #13232f, #0b0e14 80%);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      border-bottom: 1px solid #1e293b;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2300b4d8' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      opacity: 0.6;
+      pointer-events: none;
+    }
+    .hero h1 {
+      font-size: 3.6rem;
+      font-weight: 900;
+      line-height: 1.2;
+      margin-bottom: 20px;
+    }
+    .hero h1 .highlight {
+      background: linear-gradient(135deg, #00b4d8, #48cae4);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero p {
+      font-size: 1.25rem;
+      max-width: 680px;
+      margin: 0 auto 35px;
+      opacity: 0.8;
+      font-weight: 300;
+    }
+    .btn-group {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-block;
+      padding: 14px 40px;
+      border-radius: 60px;
+      font-weight: 700;
+      font-size: 1rem;
+      transition: 0.3s;
+      border: none;
+      cursor: pointer;
+      text-align: center;
+      min-height: 54px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .btn-primary {
+      background: #00b4d8;
+      color: #0b0e14;
+    }
+    .btn-primary:hover {
+      background: #48cae4;
+      transform: translateY(-3px);
+      box-shadow: 0 12px 30px rgba(0, 180, 216, 0.4);
+    }
+    .btn-outline {
+      background: transparent;
+      border: 2px solid #00b4d8;
+      color: #00b4d8;
+    }
+    .btn-outline:hover {
+      background: #00b4d8;
+      color: #0b0e14;
+      transform: translateY(-3px);
+    }
+
+    /* ===== СЕКЦИЯ ДОСТИЖЕНИЙ ===== */
+    .stats {
+      padding: 60px 0;
+      background: #0f141c;
+      border-bottom: 1px solid #1e293b;
+    }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      text-align: center;
+    }
+    .stat-item {
+      padding: 20px;
+    }
+    .stat-number {
+      font-size: 3rem;
+      font-weight: 900;
+      color: #00b4d8;
+      line-height: 1.2;
+    }
+    .stat-label {
+      font-size: 1rem;
+      opacity: 0.7;
+      margin-top: 6px;
+      letter-spacing: 0.5px;
+    }
+
+    /* ===== ОБЩИЕ ЗАГОЛОВКИ ===== */
+    .section-title {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+    .section-title h2 {
+      font-size: 2.5rem;
+      font-weight: 900;
+    }
+    .section-title h2 span {
+      color: #00b4d8;
+    }
+    .section-title p {
+      font-size: 1.1rem;
+      opacity: 0.7;
+      max-width: 600px;
+      margin: 10px auto 0;
+    }
+
+    /* ===== УСЛУГИ ===== */
+    .services {
+      padding: 80px 0;
+      background: #0b0e14;
+    }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+    }
+    .service-card {
+      background: #141b24;
+      padding: 40px 28px;
+      border-radius: 24px;
+      text-align: center;
+      border: 1px solid #1e293b;
+      transition: 0.4s;
+      position: relative;
+      overflow: hidden;
+    }
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle at center, rgba(0,180,216,0.06), transparent 70%);
+      opacity: 0;
+      transition: 0.5s;
+    }
+    .service-card:hover::before {
+      opacity: 1;
+    }
+    .service-card:hover {
+      transform: translateY(-8px);
+      border-color: #00b4d8;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+    }
+    .service-card i {
+      font-size: 3.2rem;
+      color: #00b4d8;
+      margin-bottom: 20px;
+    }
+    .service-card h3 {
+      font-size: 1.4rem;
+      margin-bottom: 12px;
+    }
+    .service-card p {
+      opacity: 0.7;
+      font-size: 0.95rem;
+    }
+
+    /* ===== О КОМПАНИИ ===== */
+    .about {
+      padding: 80px 0;
+      background: #0f141c;
+    }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 50px;
+      align-items: center;
+    }
+    .about-text h2 {
+      font-size: 2.2rem;
+      font-weight: 900;
+      margin-bottom: 20px;
+    }
+    .about-text p {
+      opacity: 0.8;
+      margin-bottom: 18px;
+    }
+    .about-list {
+      list-style: none;
+      margin-top: 20px;
+    }
+    .about-list li {
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-weight: 500;
+    }
+    .about-list i {
+      color: #00b4d8;
+      font-size: 1.3rem;
+      width: 28px;
+      flex-shrink: 0;
+    }
+    .about-image {
+      background: radial-gradient(circle at 30% 40%, #1a2a38, #0b0e14);
+      border-radius: 30px;
+      height: 280px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 5rem;
+      color: #00b4d8;
+      border: 1px solid #1e293b;
+      box-shadow: 0 0 60px rgba(0,180,216,0.05);
+    }
+
+    /* ===== ЭТАПЫ ===== */
+    .steps {
+      padding: 80px 0;
+      background: #0b0e14;
+    }
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 30px;
+    }
+    .step-item {
+      text-align: center;
+      padding: 20px;
+      background: #141b24;
+      border-radius: 20px;
+      border: 1px solid #1e293b;
+      transition: 0.3s;
+    }
+    .step-item:hover {
+      border-color: #00b4d8;
+      transform: scale(1.02);
+    }
+    .step-number {
+      display: inline-block;
+      width: 60px;
+      height: 60px;
+      line-height: 60px;
+      border-radius: 50%;
+      background: #00b4d8;
+      color: #0b0e14;
+      font-size: 1.6rem;
+      font-weight: 900;
+      margin-bottom: 20px;
+    }
+    .step-item h4 {
+      font-size: 1.2rem;
+      margin-bottom: 8px;
+    }
+    .step-item p {
+      opacity: 0.7;
+      font-size: 0.95rem;
+    }
+
+    /* ===== ОТЗЫВЫ ===== */
+    .testimonials {
+      padding: 80px 0;
+      background: #0f141c;
+    }
+    .testimonial-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 30px;
+    }
+    .testimonial-item {
+      background: #141b24;
+      padding: 30px 28px;
+      border-radius: 24px;
+      border: 1px solid #1e293b;
+      transition: 0.3s;
+    }
+    .testimonial-item:hover {
+      border-color: #00b4d8;
+    }
+    .testimonial-item .stars {
+      color: #f9a825;
+      margin-bottom: 12px;
+      font-size: 1.2rem;
+    }
+    .testimonial-item p {
+      font-style: italic;
+      margin-bottom: 15px;
+      opacity: 0.9;
+    }
+    .testimonial-item .author {
+      font-weight: 700;
+      color: #00b4d8;
+    }
+    .testimonial-item .position {
+      opacity: 0.6;
+      font-size: 0.9rem;
+    }
+
+    /* ===== КОНТАКТЫ ===== */
+    .contact {
+      padding: 80px 0;
+      background: #0b0e14;
+    }
+    .contact-wrapper {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 50px;
+    }
+    .contact-info h3 {
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+    }
+    .contact-info p {
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      opacity: 0.85;
+    }
+    .contact-info i {
+      width: 28px;
+      color: #00b4d8;
+      font-size: 1.3rem;
+      flex-shrink: 0;
+    }
+    .contact-info .social-links {
+      margin-top: 25px;
+      display: flex;
+      gap: 18px;
+      font-size: 2rem;
+    }
+    .contact-info .social-links a {
+      transition: 0.3s;
+      color: #e8edf5;
+      padding: 6px;
+    }
+    .contact-info .social-links a:hover {
+      color: #00b4d8;
+      transform: translateY(-3px);
+    }
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      padding: 16px 20px;
+      border: 1px solid #1e293b;
+      border-radius: 16px;
+      font-size: 1rem;
+      margin-bottom: 18px;
+      background: #141b24;
+      color: #e8edf5;
+      transition: 0.3s;
+      font-family: inherit;
+    }
+    .contact-form input:focus,
+    .contact-form textarea:focus {
+      outline: none;
+      border-color: #00b4d8;
+      box-shadow: 0 0 0 3px rgba(0, 180, 216, 0.2);
+      background: #1a2533;
+    }
+    .contact-form textarea {
+      height: 130px;
+      resize: vertical;
+    }
+    .contact-form .btn {
+      width: 100%;
+      background: #00b4d8;
+      color: #0b0e14;
+      font-weight: 700;
+      padding: 16px;
+      min-height: 58px;
+    }
+    .contact-form .btn:hover {
+      background: #48cae4;
+    }
+
+    /* ===== ФУТЕР ===== */
+    footer {
+      background: #080b10;
+      padding: 30px 0;
+      text-align: center;
+      border-top: 1px solid #1e293b;
+    }
+    footer .social a {
+      color: #5a6f84;
+      margin: 0 14px;
+      font-size: 1.6rem;
+      transition: 0.3s;
+      display: inline-block;
+      padding: 4px;
+    }
+    footer .social a:hover {
+      color: #00b4d8;
+    }
+    footer p {
+      margin-top: 16px;
+      opacity: 0.5;
+      font-size: 0.9rem;
+    }
+
+    /* ===== КНОПКА НАВЕРХ ===== */
+    .scroll-top {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: #00b4d8;
+      color: #0b0e14;
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      cursor: pointer;
+      border: none;
+      box-shadow: 0 8px 25px rgba(0, 180, 216, 0.4);
+      transition: 0.3s;
+      z-index: 999;
+      opacity: 0;
+      transform: translateY(20px);
+      pointer-events: none;
+    }
+    .scroll-top.visible {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+    .scroll-top:hover {
+      background: #48cae4;
+      transform: scale(1.1);
+    }
+
+    /* ===== АНИМАЦИЯ ПОЯВЛЕНИЯ ===== */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ============================================================ */
+    /* ===== АДАПТИВНОСТЬ ДЛЯ ТЕЛЕФОНОВ ВСЕХ РАЗМЕРОВ ===== */
+    /* ============================================================ */
+
+    /* Планшеты и маленькие ноутбуки */
+    @media (max-width: 992px) {
+      .about-grid, .contact-wrapper {
+        grid-template-columns: 1fr;
+      }
+      .stats-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    /* Телефоны в портретной ориентации (ширина ≤ 768px) */
+    @media (max-width: 768px) {
+      .nav-menu {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        margin-top: 16px;
+        gap: 14px;
+        background: #0b0e14;
+        padding: 20px;
+        border-radius: 16px;
+        border: 1px solid #1e293b;
+      }
+      .nav-menu.active {
+        display: flex;
+      }
+      .hamburger {
+        display: block;
+      }
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+      .hero p {
+        font-size: 1rem;
+      }
+      .section-title h2 {
+        font-size: 2rem;
+      }
+      .about-text h2 {
+        font-size: 1.8rem;
+      }
+      .about-image {
+        height: 200px;
+        font-size: 3.5rem;
+      }
+      .stats-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      .stat-number {
+        font-size: 2.4rem;
+      }
+      .scroll-top {
+        width: 48px;
+        height: 48px;
+        font-size: 1.4rem;
+        bottom: 20px;
+        right: 20px;
+      }
+    }
+
+    /* Маленькие телефоны (ширина ≤ 576px) */
+    @media (max-width: 576px) {
+      .container {
+        padding: 0 16px;
+      }
+      .hero {
+        padding: 60px 0 70px;
+      }
+      .hero h1 {
+        font-size: 2.2rem;
+      }
+      .hero p {
+        font-size: 0.95rem;
+        margin-bottom: 28px;
+      }
+      .btn-group {
+        flex-direction: column;
+        gap: 12px;
+        align-items: stretch;
+      }
+      .btn {
+        width: 100%;
+        padding: 14px 20px;
+        font-size: 0.95rem;
+        min-height: 50px;
+      }
+      .section-title h2 {
+        font-size: 1.8rem;
+      }
+      .section-title p {
+        font-size: 0.95rem;
+      }
+      .services-grid,
+      .steps-grid,
+      .testimonial-grid {
+        grid-template-columns: 1fr;
+      }
+      .service-card {
+        padding: 30px 20px;
+      }
+      .service-card i {
+        font-size: 2.6rem;
+      }
+      .about-text h2 {
+        font-size: 1.6rem;
+      }
+      .about-grid {
+        gap: 30px;
+      }
+      .about-image {
+        height: 160px;
+        font-size: 3rem;
+      }
+      .stats-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+      }
+      .stat-item {
+        padding: 12px;
+      }
+      .stat-number {
+        font-size: 2rem;
+      }
+      .stat-label {
+        font-size: 0.85rem;
+      }
+      .contact-wrapper {
+        gap: 30px;
+      }
+      .contact-info h3 {
+        font-size: 1.5rem;
+      }
+      .contact-form input,
+      .contact-form textarea {
+        padding: 14px 16px;
+        font-size: 0.95rem;
+      }
+      .contact-form .btn {
+        padding: 14px;
+        font-size: 0.95rem;
+        min-height: 50px;
+      }
+      .scroll-top {
+        width: 44px;
+        height: 44px;
+        font-size: 1.2rem;
+        bottom: 16px;
+        right: 16px;
+      }
+      footer .social a {
+        font-size: 1.4rem;
+        margin: 0 10px;
+      }
+    }
+
+    /* Очень маленькие телефоны (ширина ≤ 400px) */
+    @media (max-width: 400px) {
+      .container {
+        padding: 0 12px;
+      }
+      .hero {
+        padding: 50px 0 60px;
+      }
+      .hero h1 {
+        font-size: 1.8rem;
+      }
+      .hero p {
+        font-size: 0.9rem;
+      }
+      .logo {
+        font-size: 1.5rem;
+        gap: 8px;
+      }
+      .logo-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 1.4rem;
+        border-radius: 10px;
+      }
+      .section-title h2 {
+        font-size: 1.6rem;
+      }
+      .stats-grid {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+      .stat-number {
+        font-size: 1.8rem;
+      }
+      .stat-item {
+        padding: 10px;
+      }
+      .about-image {
+        height: 130px;
+        font-size: 2.5rem;
+      }
+      .service-card {
+        padding: 24px 16px;
+      }
+      .service-card h3 {
+        font-size: 1.2rem;
+      }
+      .step-item {
+        padding: 16px;
+      }
+      .testimonial-item {
+        padding: 20px 18px;
+      }
+      .contact-info p {
+        font-size: 0.95rem;
+      }
+      .contact-form input,
+      .contact-form textarea {
+        padding: 12px 14px;
+        font-size: 0.9rem;
+      }
+      .scroll-top {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+        bottom: 12px;
+        right: 12px;
+      }
+    }
+
+    /* Альбомная ориентация на телефонах (ширина > высоты) */
+    @media (max-height: 500px) and (orientation: landscape) {
+      .hero {
+        padding: 40px 0 50px;
+      }
+      .hero h1 {
+        font-size: 2rem;
+      }
+      .hero p {
+        font-size: 0.9rem;
+        margin-bottom: 20px;
+      }
+      .btn {
+        padding: 10px 20px;
+        min-height: 42px;
+        font-size: 0.9rem;
+      }
+      .stats {
+        padding: 30px 0;
+      }
+      .stat-number {
+        font-size: 1.8rem;
+      }
+      .services, .about, .steps, .testimonials, .contact {
+        padding: 50px 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===== ХЕДЕР ===== -->
+<header>
+  <div class="container header-inner">
+    <div class="logo">
+      <div class="logo-icon"><i class="fas fa-code"></i></div>
+      Code &amp; <span>Solution</span>
+    </div>
+    <div class="hamburger" id="hamburger" aria-label="Меню">
+      <i class="fas fa-bars"></i>
+    </div>
+    <nav class="nav-menu" id="navMenu">
+      <a href="#services">Услуги</a>
+      <a href="#about">О нас</a>
+      <a href="#steps">Процесс</a>
+      <a href="#testimonials">Отзывы</a>
+      <a href="#contact">Контакты</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ===== ГЕРОЙ ===== -->
+<section class="hero" id="home">
+  <div class="container">
+    <h1>Комплексные <span class="highlight">IT-решения</span></h1>
+    <p>Доработка 1С, поддержка пользователей, аудит и кибербезопасность — под одной крышей.</p>
+    <div class="btn-group">
+      <a href="#contact" class="btn btn-primary">Заказать консультацию</a>
+      <a href="#services" class="btn btn-outline">Наши услуги</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ДОСТИЖЕНИЯ ===== -->
+<section class="stats">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-item fade-up">
+        <div class="stat-number" data-target="10">0</div>
+        <div class="stat-label">лет на рынке</div>
+      </div>
+      <div class="stat-item fade-up">
+        <div class="stat-number" data-target="20+">0</div>
+        <div class="stat-label">реализованных проектов</div>
+      </div>
+      <div class="stat-item fade-up">
+        <div class="stat-number" data-target="98">0</div>
+        <div class="stat-label">довольных клиентов</div>
+      </div>
+      <div class="stat-item fade-up">
+        <div class="stat-number" data-target="24">0</div>
+        <div class="stat-label">часа поддержки / 7 дней</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== УСЛУГИ ===== -->
+<section class="services" id="services">
+  <div class="container">
+    <div class="section-title fade-up">
+      <h2>Наши <span>услуги</span></h2>
+      <p>Полный стек для вашего бизнеса — от кода до защиты.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card fade-up">
+        <i class="fas fa-code"></i>
+        <h3>Доработка 1С</h3>
+        <p>Индивидуальные доработки, интеграции и оптимизация бизнес-процессов на платформе 1С.</p>
+      </div>
+      <div class="service-card fade-up">
+        <i class="fas fa-headset"></i>
+        <h3>Поддержка пользователей</h3>
+        <p>Техническая поддержка сотрудников, консультации и обучение работе с системами.</p>
+      </div>
+      <div class="service-card fade-up">
+        <i class="fas fa-search"></i>
+        <h3>Аудит ИТ-инфраструктуры</h3>
+        <p>Анализ текущего состояния, выявление узких мест и рекомендации по повышению эффективности.</p>
+      </div>
+      <div class="service-card fade-up">
+        <i class="fas fa-shield-alt"></i>
+        <h3>Кибербезопасность</h3>
+        <p>Защита данных, настройка политик безопасности, мониторинг угроз и предотвращение атак.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== О КОМПАНИИ ===== -->
+<section class="about" id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-text fade-up">
+        <h2>Почему <span style="color:#00b4d8;">Code & Solution</span>?</h2>
+        <p>Мы — команда экспертов с более чем 10-летним опытом в автоматизации и безопасности. Наша миссия — делать технологии доступными и надёжными для вашего бизнеса.</p>
+        <ul class="about-list">
+          <li><i class="fas fa-check-circle"></i> Сертифицированные специалисты по 1С и информационной безопасности</li>
+          <li><i class="fas fa-check-circle"></i> Индивидуальный подход и гибкие решения под ваши задачи</li>
+          <li><i class="fas fa-check-circle"></i> Круглосуточный мониторинг и оперативная поддержка</li>
+          <li><i class="fas fa-check-circle"></i> Прозрачные цены и фиксированные сроки</li>
+        </ul>
+      </div>
+      <div class="about-image fade-up">
+        <i class="fas fa-server"></i>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ЭТАПЫ ===== -->
+<section class="steps" id="steps">
+  <div class="container">
+    <div class="section-title fade-up">
+      <h2>Как мы <span>работаем</span></h2>
+      <p>Прозрачный процесс от первой встречи до сдачи проекта.</p>
+    </div>
+    <div class="steps-grid">
+      <div class="step-item fade-up">
+        <div class="step-number">1</div>
+        <h4>Анализ</h4>
+        <p>Изучаем бизнес-процессы и текущую инфраструктуру.</p>
+      </div>
+      <div class="step-item fade-up">
+        <div class="step-number">2</div>
+        <h4>Проектирование</h4>
+        <p>Разрабатываем ТЗ и выбираем оптимальные решения.</p>
+      </div>
+      <div class="step-item fade-up">
+        <div class="step-number">3</div>
+        <h4>Внедрение</h4>
+        <p>Тестируем на стенде, обучаем сотрудников.</p>
+      </div>
+      <div class="step-item fade-up">
+        <div class="step-number">4</div>
+        <h4>Сопровождение</h4>
+        <p>Передаём в эксплуатацию и остаёмся на связи.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ОТЗЫВЫ ===== -->
+<section class="testimonials" id="testimonials">
+  <div class="container">
+    <div class="section-title fade-up">
+      <h2>Отзывы <span>клиентов</span></h2>
+      <p>Реальные мнения о нашей работе.</p>
+    </div>
+    <div class="testimonial-grid">
+      <div class="testimonial-item fade-up">
+        <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+        <p>«Code & Solution полностью перестроили работу в 1С. Теперь процессы быстрее, сотрудники довольны. Рекомендую!»</p>
+        <div class="author">Алексей М.</div>
+        <div class="position">Генеральный директор, «ТехноСтар»</div>
+      </div>
+      <div class="testimonial-item fade-up">
+        <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+        <p>«Провели аудит ИТ-инфраструктуры и нашли критические уязвимости. Благодаря их кибербезопасности мы спим спокойно.»</p>
+        <div class="author">Екатерина В.</div>
+        <div class="position">Руководитель ИТ, «ФинГрупп»</div>
+      </div>
+      <div class="testimonial-item fade-up">
+        <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+        <p>«Поддержка пользователей на высоте — реагируют мгновенно, решают любые вопросы. Огромное спасибо команде!»</p>
+        <div class="author">Иван П.</div>
+        <div class="position">Начальник отдела продаж, «Альфа-Трейд»</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== КОНТАКТЫ ===== -->
+<section class="contact" id="contact">
+  <div class="container">
+    <div class="section-title fade-up">
+      <h2>Свяжитесь <span>с нами</span></h2>
+      <p>Оставьте заявку, и мы подберём оптимальное решение для вашего бизнеса.</p>
+    </div>
+    <div class="contact-wrapper">
+      <div class="contact-info fade-up">
+        <h3>Контакты</h3>
+        <p><i class="fas fa-map-marker-alt"></i> г. Новосибирск, ул. Кошурникова, д. 2/1</p>
+        <p><i class="fas fa-phone-alt"></i> +7 (963) 575-87-77</p>
+        <p><i class="fas fa-envelope"></i> info@code-solution.ru</p>
+        <p><i class="fas fa-clock"></i> Пн–Пт: 9:00 – 20:00</p>
+        <div class="social-links">
+          <a href="#" aria-label="Telegram"><i class="fab fa-telegram"></i></a>
+          <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+          <a href="#" aria-label="VK"><i class="fab fa-vk"></i></a>
+          <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+      <form class="contact-form fade-up" id="contactForm">
+        <input type="text" placeholder="Ваше имя" required />
+        <input type="email" placeholder="Электронная почта" required />
+        <input type="tel" placeholder="Телефон" required />
+        <textarea placeholder="Опишите вашу задачу..." required></textarea>
+        <button type="submit" class="btn">Отправить заявку</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ФУТЕР ===== -->
+<footer>
+  <div class="container">
+    <div class="social">
+      <a href="#" aria-label="Telegram"><i class="fab fa-telegram"></i></a>
+      <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+      <a href="#" aria-label="VK"><i class="fab fa-vk"></i></a>
+      <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+    </div>
+    <p>&copy; 2026 Code &amp; Solution. Все права защищены.</p>
+  </div>
+</footer>
+
+<!-- ===== КНОПКА НАВЕРХ ===== -->
+<button class="scroll-top" id="scrollTopBtn" aria-label="Наверх">
+  <i class="fas fa-chevron-up"></i>
+</button>
+
+<!-- ===== JAVASCRIPT ===== -->
+<script>
+  // ===== Гамбургер =====
+  const hamburger = document.getElementById('hamburger');
+  const navMenu = document.getElementById('navMenu');
+  hamburger.addEventListener('click', () => {
+    navMenu.classList.toggle('active');
+  });
+  document.querySelectorAll('.nav-menu a').forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth <= 768) navMenu.classList.remove('active');
+    });
+  });
+
+  // ===== Плавный скролл =====
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      const href = this.getAttribute('href');
+      if (href === '#') return;
+      e.preventDefault();
+      const target = document.querySelector(href);
+      if (target) {
+        const top = target.getBoundingClientRect().top + window.pageYOffset - 70;
+        window.scrollTo({ top, behavior: 'smooth' });
+      }
+    });
+  });
+
+  // ===== Анимация появления (Intersection Observer) =====
+  const fadeElements = document.querySelectorAll('.fade-up');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -20px 0px' });
+  fadeElements.forEach(el => observer.observe(el));
+
+  // ===== Анимированные счётчики =====
+  const statNumbers = document.querySelectorAll('.stat-number');
+  let countersAnimated = false;
+
+  function animateCounters() {
+    if (countersAnimated) return;
+    statNumbers.forEach(stat => {
+      const target = parseInt(stat.getAttribute('data-target'));
+      if (isNaN(target)) return;
+      let current = 0;
+      const increment = target / 60;
+      const timer = setInterval(() => {
+        current += increment;
+        if (current >= target) {
+          stat.textContent = target + (target === 98 ? '%' : '');
+          clearInterval(timer);
+        } else {
+          stat.textContent = Math.floor(current) + (target === 98 ? '%' : '');
+        }
+      }, 25);
+    });
+    countersAnimated = true;
+  }
+
+  const statsSection = document.querySelector('.stats');
+  const statsObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && !countersAnimated) {
+        animateCounters();
+      }
+    });
+  }, { threshold: 0.3 });
+  if (statsSection) statsObserver.observe(statsSection);
+
+  // ===== Кнопка "Наверх" =====
+  const scrollBtn = document.getElementById('scrollTopBtn');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 400) {
+      scrollBtn.classList.add('visible');
+    } else {
+      scrollBtn.classList.remove('visible');
+    }
+  });
+  scrollBtn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  // ===== Форма =====
+  const contactForm = document.getElementById('contactForm');
+  contactForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    alert('Спасибо! Ваша заявка принята. Мы свяжемся с вами в ближайшее время.');
+    this.reset();
+  });
+</script>
+</body>
+</html>
